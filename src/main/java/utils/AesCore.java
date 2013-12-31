@@ -7,7 +7,7 @@ import java.security.spec.InvalidKeySpecException;
 
 public class AesCore {
     Key key;
-    Cipher aes;
+    Cipher cipher;
 
     public AesCore(String passphrase)
             throws InvalidParameterException{
@@ -15,7 +15,7 @@ public class AesCore {
             throw new InvalidParameterException("Passphrase cannot be null or empty");
 
         try {
-            aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             key = getKey(passphrase);
         }
         catch (Exception e){
@@ -36,14 +36,14 @@ public class AesCore {
 
     public byte[] encrypt(String cleartext)
             throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        aes.init(Cipher.ENCRYPT_MODE,  key);
-        return aes.doFinal(cleartext.getBytes());
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        return cipher.doFinal(cleartext.getBytes());
     }
 
     public String decrypt(byte[] ciphertext)
             throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        aes.init(Cipher.DECRYPT_MODE, key);
-        return new String(aes.doFinal(ciphertext));
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        return new String(cipher.doFinal(ciphertext));
     }
 
 }
