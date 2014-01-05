@@ -28,12 +28,12 @@ public class EncryptorTest {
     }
 
     @Test(expected = InvalidParameterException.class )
-    public void testEncryptorConstructor_ThrowsException_GivenNull(){
+    public void testAesEncryptorConstructor_ThrowsException_GivenNull(){
         encryptor = new AesEncryptor(null);
     }
 
     @Test(expected = InvalidParameterException.class )
-    public void testEncryptorConstructor_ThrowsException_GivenEmpty(){
+    public void testAesEncryptorConstructor_ThrowsException_GivenEmpty(){
         encryptor = new AesEncryptor("");
     }
 
@@ -44,6 +44,7 @@ public class EncryptorTest {
         String actual = core.decrypt(b);
 
         assertEquals(expected, actual);
+
     }
 
     @Test
